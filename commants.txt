@@ -17,23 +17,24 @@ source venv/bin/activate
 pip install Flask
 
 sudo docker build -t demo-python:1 .
-sudo docker run -d -p 8000:8000 --name demo-container demo-python:11~sudo docker logs -f web
-sudo docker top web
-sudo docker run -it --name lab-ubuntu ubuntu:24.04 bash
-root@45783ba310c1:/# sudo apt-get update && apt-get install -y curl	
-root@45783ba310c1:/# mkdir -p /opt && echo "lab image v1" >/opt/banner.txt
-root@45783ba310c1:/# cat /opt/banner.txt
-root@45783ba310c1:/# exit
-anton@ant:~$ sudo docker commit lab-ubuntu lab-ubuntu:curl
-sudo docker run lab-ubuntu:curl
-sudo apt install python3-pip
-
-make app
-cd /app
-sudo app install python3-flask
-sudo apt install python3.12-venv
-source venv/bin/activate
-pip install Flask
-
-sudo docker build -t demo-python:1 .
 sudo docker run -d -p 8000:8000 --name demo-container demo-python:1
+
+---------------------------------------------
+
+docker ps - текущие живые контейнеры
+docker ps -a - история запуска контейнеров
+docker logs -f container_name — показывать логи контейнера в реальном времени
+docker top container_name — показать процессы внутри контейнера
+docker run -it --name mycontainer ubuntu bash — запустить интерактивный контейнер с bash
+docker commit container_name new_image_name — создать образ из контейнера
+docker build -t image_name:tag . — собрать образ из Dockerfile в текущей папке
+docker run -d -p 8000:8000 --name container image_name:tag — запустить контейнер в фоне с пробросом порта
+apt-get update — обновить список пакетов
+apt-get install -y package_name — установить пакет без запроса подтверждения
+mkdir -p /path/to/dir — создать папку и родительские, если нет
+echo "text" > file.txt — записать текст в файл
+cat file.txt — вывести содержимое файла
+apt install python3-pip — установить pip для Python 3
+apt install python3-venv — установить модуль для создания виртуальных окружений
+source venv/bin/activate — активировать виртуальное окружение Python
+pip install package_name — установить пакет Python в текущее окружение
